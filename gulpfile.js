@@ -11,6 +11,14 @@ var gulp = require('gulp'),
 
 // Variables
 var path = {
+  dependency: {
+    bootstrap:  {
+      root: 'node_modules/bootstrap-sass/',
+      scss: 'node_modules/bootstrap-sass/assets/stylesheets/',
+      font: 'node_modules/bootstrap-sass/assets/fonts/',
+      js: 'node_modules/bootstrap-sass//assets/javascripts/'
+    }
+  },
   src: {
     root: 'src/',
     scss: 'src/scss/',
@@ -18,10 +26,11 @@ var path = {
   },
   public: {
     root: 'public/',
-    assets: 'public/assets/',
-    images: 'public/assets/img/',
-    css: 'public/assets/css/',
-    scripts: 'public/assets/js/'
+    assets: 'public/',
+    images: 'public/img/',
+    fonts: 'public/fonts/',
+    css: 'public/css/',
+    scripts: 'public/js/'
   }
 };
 
@@ -36,7 +45,9 @@ var file = {
 
 gulp.task('sass', function () {
   return gulp.src(path.src.scss + '**/*.scss')
-    .pipe(sass().on('error', sass.logError))      // Compile le code SASS
+    .pipe(sass({
+      includePaths: [path.dependency.bootstrap.scss]
+    }).on('error', sass.logError))      // Compile le code SASS
     .pipe(concat(file.public.css))                // Concatène le code CSS
     .pipe(gulp.dest(path.public.css))             // Publie le fichier CSS dans le dossier CSS
     //.pipe(uncss({html: ['public/index.html']}))   // Enlève le fichier CSS des dépendances du code HTML
@@ -57,6 +68,17 @@ gulp.task('scripts', function () {
 });
 
 
+gulp.task('bootstrap-fonts', function() {
+  return gulp.src(path.dependency.bootstrap.fonts + '/**/*')
+    .pipe(gulp.dest(path.public.fonts));
+});
+
+gulp.task('bootstrap-js', function() {
+  return gulp.src(path.dependency.bootstrap.js + 'bootstrap.min.js')
+    .pipe(gulp.dest(path.public.scripts));
+});
+
+
 // Watch tasks
 gulp.task('sass:watch', function () {
   gulp.watch(path.src.scss + '**/*.scss', ['sass']);
@@ -66,4 +88,9 @@ gulp.task('scripts:watch', function () {
   gulp.watch(path.src.scripts + '**/*.js', ['scripts']);
 });
 
-gulp.task('all:watch', ['sass:watch', 'scripts:watch']);
+gulp.task('all:watch', ['bootstrap-fonts',
+                        'bootstrap-js',
+                        'sass',
+                        'scripts',
+                        'sass:watch',
+                        'scripts:watch']);
