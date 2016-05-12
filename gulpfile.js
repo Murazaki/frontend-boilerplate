@@ -15,8 +15,8 @@ var path = {
     bootstrap:  {
       root: 'node_modules/bootstrap-sass/',
       scss: 'node_modules/bootstrap-sass/assets/stylesheets/',
-      font: 'node_modules/bootstrap-sass/assets/fonts/',
-      js: 'node_modules/bootstrap-sass//assets/javascripts/'
+      fonts: 'node_modules/bootstrap-sass/assets/fonts/',
+      js: 'node_modules/bootstrap-sass/assets/javascripts/'
     }
   },
   src: {
@@ -69,7 +69,7 @@ gulp.task('scripts', function () {
 
 
 gulp.task('bootstrap-fonts', function() {
-  return gulp.src(path.dependency.bootstrap.fonts + '/**/*')
+  return gulp.src(path.dependency.bootstrap.fonts + '**/*')
     .pipe(gulp.dest(path.public.fonts));
 });
 

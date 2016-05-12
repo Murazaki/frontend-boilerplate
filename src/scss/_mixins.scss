@@ -4,3 +4,8 @@
   border-color: $color;
   border-radius: $radius;
 }
+
+@mixin transition($value) {
+  -webkit-transition: $value;
+  transition: $value;
+}

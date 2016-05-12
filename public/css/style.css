@@ -5913,15 +5913,15 @@ input,
   .panel-default .panel-footer {
     color: #98978B; }
 
-.box {
-  border-width: 2px;
-  border-style: solid;
-  border-color: black;
-  border-radius: 4px; }
-  .box:hover {
-    background-color: #eee; }
-  .box.box-small {
-    border-width: 1px;
-    border-style: solid;
-    border-color: blue;
-    border-radius: 2px; }
+.theme-default, .navbar, .container {
+  color: #8888ee;
+  background-color: #ffffff; }
+
+.navbar > ul {
+  color: #b5b5f4; }
+
+.btn-default {
+  color: #ffffff;
+  background-color: #8888ee; }
+  .btn-default:hover {
+    background-color: #2f2fe1; }

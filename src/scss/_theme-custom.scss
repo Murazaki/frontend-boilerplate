@@ -1,0 +1,26 @@
+
+.theme-default {
+  color: $couleur-texte;
+  background-color: $couleur-fond;
+}
+
+.navbar {
+  @extend .theme-default;
+
+  & > ul {
+    color: lighten($couleur-texte,10%);
+  }
+}
+
+.container {
+  @extend .theme-default;
+}
+
+.btn-default {
+  color: $couleur-texte-inversee;
+  background-color: $couleur-fond-inversee;
+
+  &:hover {
+    background-color: darken($couleur-fond-inversee, 20%); // $couleur-fond-inversee + #ccccccc;
+  }
+}
